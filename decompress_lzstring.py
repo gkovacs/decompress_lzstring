@@ -87,7 +87,7 @@ def lzdecompress(length, resetValue, getNextValue):
         data['index'] += 1
       bits |= one_if_greater_than_zero(resb) * power
       power <<= 1
-    c = chr(bits)
+    c = unichr(bits)
   elif next == 1:
     bits = 0
     maxpower = pow(2, 16)
@@ -101,7 +101,7 @@ def lzdecompress(length, resetValue, getNextValue):
         data['index'] += 1
       bits |= one_if_greater_than_zero(resb) * power
       power <<= 1
-    c = chr(bits)
+    c = unichr(bits)
   elif next == 2:
     return ''
   
@@ -139,7 +139,7 @@ def lzdecompress(length, resetValue, getNextValue):
           data['index'] += 1
         bits |= one_if_greater_than_zero(resb) * power
         power <<= 1
-      assign_array(dictionary, dictSize, chr(bits))
+      assign_array(dictionary, dictSize, unichr(bits))
       dictSize += 1
       c = dictSize - 1
       enlargeIn -= 1
@@ -156,7 +156,7 @@ def lzdecompress(length, resetValue, getNextValue):
           data['index'] += 1
         bits |= one_if_greater_than_zero(resb) * power
         power <<= 1
-      assign_array(dictionary, dictSize, chr(bits))
+      assign_array(dictionary, dictSize, unichr(bits))
       dictSize += 1
       c = dictSize - 1
       enlargeIn -= 1
