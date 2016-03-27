@@ -42,23 +42,21 @@ def lzdecompress(length, resetValue, input):
   maxpower = 0
   power = 0
   c = 0
-  data = {
-    'val': baseReverseDic[input[0]],
-    'position': resetValue,
-    'index': 1
-  }
+  data_val = baseReverseDic[input[0]]
+  data_position = resetValue
+  data_index = 1
   for i in range(3):
     assign_array(dictionary, i, i)
   bits = 0
   maxpower = pow(2, 2)
   power = 1
   while power != maxpower:
-    resb = data['val'] & data['position']
-    data['position'] >>= 1
-    if data['position'] == 0:
-      data['position'] = resetValue
-      data['val'] = baseReverseDic[input[data['index']]]
-      data['index'] += 1
+    resb = data_val & data_position
+    data_position >>= 1
+    if data_position == 0:
+      data_position = resetValue
+      data_val = baseReverseDic[input[data_index]]
+      data_index += 1
     bits |= one_if_greater_than_zero(resb) * power
     power <<= 1
   
@@ -68,12 +66,12 @@ def lzdecompress(length, resetValue, input):
     maxpower = pow(2, 8)
     power = 1
     while power != maxpower:
-      resb = data['val'] & data['position']
-      data['position'] >>= 1
-      if data['position'] == 0:
-        data['position'] = resetValue
-        data['val'] = baseReverseDic[input[data['index']]]
-        data['index'] += 1
+      resb = data_val & data_position
+      data_position >>= 1
+      if data_position == 0:
+        data_position = resetValue
+        data_val = baseReverseDic[input[data_index]]
+        data_index += 1
       bits |= one_if_greater_than_zero(resb) * power
       power <<= 1
     c = unichr(bits)
@@ -82,12 +80,12 @@ def lzdecompress(length, resetValue, input):
     maxpower = pow(2, 16)
     power = 1
     while power != maxpower:
-      resb = data['val'] & data['position']
-      data['position'] >>= 1
-      if data['position'] == 0:
-        data['position'] = resetValue
-        data['val'] = baseReverseDic[input[data['index']]]
-        data['index'] += 1
+      resb = data_val & data_position
+      data_position >>= 1
+      if data_position == 0:
+        data_position = resetValue
+        data_val = baseReverseDic[input[data_index]]
+        data_index += 1
       bits |= one_if_greater_than_zero(resb) * power
       power <<= 1
     c = unichr(bits)
@@ -98,18 +96,18 @@ def lzdecompress(length, resetValue, input):
   w = c
   result.append(c)
   while True:
-    if data['index'] > length:
+    if data_index > length:
       return ''
     bits = 0
     maxpower = pow(2, numBits)
     power = 1
     while power != maxpower:
-      resb = data['val'] & data['position']
-      data['position'] >>= 1
-      if data['position'] == 0:
-        data['position'] = resetValue
-        data['val'] = baseReverseDic[input[data['index']]]
-        data['index'] += 1
+      resb = data_val & data_position
+      data_position >>= 1
+      if data_position == 0:
+        data_position = resetValue
+        data_val = baseReverseDic[input[data_index]]
+        data_index += 1
       bits |= one_if_greater_than_zero(resb) * power
       power <<= 1
     
@@ -120,12 +118,12 @@ def lzdecompress(length, resetValue, input):
       maxpower = pow(2, 8)
       power = 1
       while power != maxpower:
-        resb = data['val'] & data['position']
-        data['position'] >>= 1
-        if data['position'] == 0:
-          data['position'] = resetValue
-          data['val'] = baseReverseDic[input[data['index']]]
-          data['index'] += 1
+        resb = data_val & data_position
+        data_position >>= 1
+        if data_position == 0:
+          data_position = resetValue
+          data_val = baseReverseDic[input[data_index]]
+          data_index += 1
         bits |= one_if_greater_than_zero(resb) * power
         power <<= 1
       assign_array(dictionary, dictSize, unichr(bits))
@@ -137,12 +135,12 @@ def lzdecompress(length, resetValue, input):
       maxpower = pow(2, 16)
       power = 1
       while power != maxpower:
-        resb = data['val'] & data['position']
-        data['position'] >>= 1
-        if data['position'] == 0:
-          data['position'] = resetValue
-          data['val'] = baseReverseDic[input[data['index']]]
-          data['index'] += 1
+        resb = data_val & data_position
+        data_position >>= 1
+        if data_position == 0:
+          data_position = resetValue
+          data_val = baseReverseDic[input[data_index]]
+          data_index += 1
         bits |= one_if_greater_than_zero(resb) * power
         power <<= 1
       assign_array(dictionary, dictSize, unichr(bits))
