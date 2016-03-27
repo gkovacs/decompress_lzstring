@@ -17,9 +17,11 @@ def decompressFromBase64(input):
     return ''
   return lzdecompress(len(input), 32, input)
 
-def lzdecompress(length, resetValue, input):
+def lzdecompress(int length, int resetValue, input):
   #dictionary = []
   dictionary = []
+  cdef int next, dictSize, numBits, i, bits, resb, maxpower, power, data_position, data_index, data_val
+  cdef long long enlargeIn
   next = 0
   enlargeIn = 4
   dictSize = 4
