@@ -27,12 +27,12 @@ def lzdecompress(length, resetValue, input):
   entry = ''
   result = []
   i = 0
-  w = 0
+  w = ''
   bits = 0
   resb = 0
   maxpower = 0
   power = 0
-  c = 0
+  c = ''
   data_val = baseReverseDic[input[0]]
   data_position = resetValue
   data_index = 1
