@@ -41,7 +41,7 @@ def lzdecompress(length, resetValue, input):
   for i in range(3):
     dictionary.append(i)
   bits = 0
-  maxpower = pow(2, 2)
+  maxpower = 4
   power = 1
   while power != maxpower:
     resb = data_val & data_position
@@ -60,7 +60,7 @@ def lzdecompress(length, resetValue, input):
   next = bits
   if next == 0:
     bits = 0
-    maxpower = pow(2, 8)
+    maxpower = 256
     power = 1
     while power != maxpower:
       resb = data_val & data_position
@@ -78,7 +78,7 @@ def lzdecompress(length, resetValue, input):
     c = unichr(bits)
   elif next == 1:
     bits = 0
-    maxpower = pow(2, 16)
+    maxpower = 65536
     power = 1
     while power != maxpower:
       resb = data_val & data_position
@@ -104,7 +104,7 @@ def lzdecompress(length, resetValue, input):
     if data_index > length:
       return ''
     bits = 0
-    maxpower = pow(2, numBits)
+    maxpower = 1 << numBits
     power = 1
     while power != maxpower:
       resb = data_val & data_position
@@ -124,7 +124,7 @@ def lzdecompress(length, resetValue, input):
     old_c = c
     if old_c == 0:
       bits = 0
-      maxpower = pow(2, 8)
+      maxpower = 256
       power = 1
       while power != maxpower:
         resb = data_val & data_position
@@ -145,7 +145,7 @@ def lzdecompress(length, resetValue, input):
       enlargeIn -= 1
     elif old_c == 1:
       bits = 0
-      maxpower = pow(2, 16)
+      maxpower = 65536
       power = 1
       while power != maxpower:
         resb = data_val & data_position
@@ -168,7 +168,7 @@ def lzdecompress(length, resetValue, input):
       return ''.join(result)
     
     if enlargeIn == 0:
-      enlargeIn = pow(2, numBits)
+      enlargeIn = 1 << numBits
       numBits += 1
     
     if len(dictionary) > c and dictionary[c]:
@@ -187,5 +187,5 @@ def lzdecompress(length, resetValue, input):
     w = entry
     
     if enlargeIn == 0:
-      enlargeIn = pow(2, numBits)
+      enlargeIn = 1 << numBits
       numBits += 1
